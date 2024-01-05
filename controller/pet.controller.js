@@ -48,7 +48,7 @@ exports.postPet = async (req,res) => {
     }
 
 }
-exports.getPets = async (req,res) => {
+exports.getPetById = async (req,res) => {
     try{
         let id= req.params.petNumber;
         let pet  = await PET.findOne({ _id: id});
