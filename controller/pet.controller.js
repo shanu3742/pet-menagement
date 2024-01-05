@@ -48,3 +48,21 @@ exports.postPet = async (req,res) => {
     }
 
 }
+exports.getPets = async (req,res) => {
+    try{
+        let id= req.params.blogNumber;
+        let pet  = await PET.findOne({ _id: id});
+
+        if(!pet){
+         return    res.status(404).send({
+                message: `Pet Not Found  For The Given Id`,
+              })
+        }
+        res.status(200).send(pet)
+
+    }catch(e){
+        res.status(500).send({
+            message: `internal server error ${e}`,
+          })
+    }
+}
