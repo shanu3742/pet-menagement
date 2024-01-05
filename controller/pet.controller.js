@@ -50,7 +50,7 @@ exports.postPet = async (req,res) => {
 }
 exports.getPets = async (req,res) => {
     try{
-        let id= req.params.blogNumber;
+        let id= req.params.petNumber;
         let pet  = await PET.findOne({ _id: id});
 
         if(!pet){
