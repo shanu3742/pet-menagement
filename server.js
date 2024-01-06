@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const PET = require('./model/pet.model')
 const bodyParser = require('body-parser');
 const  cors = require('cors');
+const { appendFile } = require('fs');
 
 //init app 
 const app = express();
@@ -88,6 +89,7 @@ db.on('error', () => console.log('something went wrong'));
  */
 
 require('./router/pet.router')(app)
+require('./router/user.router')(app)
 //connect the server
 
 app.listen(APP_CONFIG.PORT,() => {
