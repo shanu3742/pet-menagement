@@ -48,6 +48,10 @@ const userSchema = new mongoose.Schema({
     commentPet:{
         type: [mongoose.SchemaType.ObjectId],
         ref: "pets"
+    },
+    wishLists:{
+        type: [mongoose.SchemaType.ObjectId],
+        ref: "pets"
     }
 })
 
