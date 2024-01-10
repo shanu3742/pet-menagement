@@ -50,8 +50,8 @@ const userSchema = new mongoose.Schema({
         ref: "pets"
     },
     wishLists:{
-        type: [mongoose.SchemaType.ObjectId],
-        ref: "pets"
+        type: [],
+        
     }
 })
 

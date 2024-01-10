@@ -123,3 +123,43 @@ res.status(200).send(petList)
       }) 
 }
 }
+
+exports.deletePetList = async(req,res) => {
+        try{
+            console.log(req.params)
+            let id= req.params?.userId;
+            let petId= req.params?.petId;
+            if(!petId){
+              return  res.status(400).send({
+                    message: `id not provided`,
+                  }) 
+            }
+            let user= await USER.findOne({ id: id});
+            console.log('user',user)
+           if(!user?.wishLists?.includes(petId)){
+            return  res.status(400).send({
+                message: `pet allready removed or not in your wishlish`,
+              }) 
+           }
+           
+           let petList =user.wishLists;
+           let filterPetList =petList.filter((el) => el !==petId)
+
+           user.wishLists= [...filterPetList];
+           await user.save();
+
+           if(!user.wishLists.length){
+           return res.status(200).send([])
+           }
+           const petListToSave=  await PET.find({
+            _id:{$in:[...user.wishLists]}
+        })
+
+           res.status(200).send(petListToSave)
+
+        }catch(e){
+            res.status(500).send({
+                message: `internal server error ${e}`,
+              })  
+        }
+}
