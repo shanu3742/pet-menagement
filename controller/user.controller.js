@@ -112,6 +112,11 @@ exports.addPetToWishList = async (req,res) => {
 
 exports.getPetList= async  (req,res) => {
 try{
+    if(!req.body.wishLists.length){
+        return   res.status(400).send({
+            message: `pet not in your wishlish`,
+          }) 
+    }
 const petList =  await PET.find({
     _id:{$in:[...req.body.wishLists]}
 })
