@@ -5,6 +5,6 @@ module.exports = (app) => {
     app.post('/petApp/api/v1/userDetails',postDetails)
     app.get('/petApp/api/v1/user/:userId',getUserDetails)
     app.post('/petApp/api/v1/user/wishlist/:userId',addPetToWishList);
-    app.get('/petApp/api/v1/user/wishlist/:userId',getPetList)
+    app.post('/petApp/api/v1/user/wishlist/pet/:userId',getPetList)
     app.get('/petApp/api/v1/user/wishlist/:userId/:petId',deletePetList)
 }

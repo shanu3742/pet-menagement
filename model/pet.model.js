@@ -6,6 +6,15 @@ const petSchema = new mongoose.Schema({
     animaltype:{
         type:String,
     },
+    sex:{
+     type:String
+    },
+    age:{
+      type:String
+    },
+    weight:{
+        type:String
+    },
     id:{
        type:String
     },

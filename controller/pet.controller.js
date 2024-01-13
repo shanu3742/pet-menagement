@@ -18,6 +18,10 @@ exports.postPet = async (req,res) => {
             animaltype: petData?.animaltype,
             name:petData?.name,
             id: petData?.id,
+            sex:petData?.sex??'N/A',
+            age:petData?.age??'N/A',
+            weight:petData?.weight??'N/A',
+
             description: petData?.description??'N/A',
             like: 0,
             dislike:0,
