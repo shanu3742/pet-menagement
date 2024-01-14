@@ -7,4 +7,5 @@ module.exports = (app) => {
     app.post('/petApp/api/v1/user/wishlist/:userId',addPetToWishList);
     app.get('/petApp/api/v1/user/wishlist/:userId',getPetList)
     app.get('/petApp/api/v1/user/wishlist/:userId/:petId',deletePetList)
+    
 }

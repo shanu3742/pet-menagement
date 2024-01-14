@@ -70,3 +70,16 @@ exports.getPetById = async (req,res) => {
           })
     }
 }
+
+exports.petSearch = async (req,res) => {
+    try{
+        const pet = await PET.find({animaltype:req.query.name}).sort({ createdAt: -1 })
+        res.status(200).send(pet)
+
+    }catch(e){
+        res.status(500).send({
+            message: `internal server error ${e}`,
+          })
+    }
+
+}
