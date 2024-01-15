@@ -176,4 +176,33 @@ exports.deletePetList = async(req,res) => {
               })  
         }
 }
+exports.updateUser = async (req,res) => {
+    try{
+        let id= req.params?.userId;
+        if(!id){
+            return  res.status(400).send({
+                message: `please  provide user id to update a particular user`,
+              }) 
+        }
 
+        let user= await USER.findOne({ id: id});
+
+        if(!user){
+            return  res.status(400).send({
+                message: `No user with given id`,
+              }) 
+        }
+
+        user.name=req?.body?.name??user?.name;
+        user.image=req?.body?.image??user?.image;
+    
+        await user.save();
+        res.status(200).send(user)
+
+    }catch(e){
+        res.status(500).send({
+            message: `internal server error ${e}`,
+          })  
+    }
+
+}
