@@ -90,6 +90,7 @@ db.on('error', () => console.log('something went wrong'));
 
 require('./router/pet.router')(app)
 require('./router/user.router')(app)
+require('./router/payment.router')(app)
 //connect the server
 
 app.listen(APP_CONFIG.PORT,() => {

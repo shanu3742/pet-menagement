@@ -29,10 +29,7 @@ const userSchema = new mongoose.Schema({
         type: [mongoose.SchemaType.ObjectId],
         ref: "pets"
     },
-    newOrder:{
-        type: [mongoose.SchemaType.ObjectId],
-        ref: "pets"
-    },
+    newOrder:Array,
     orderToDelever:{
         type: [mongoose.SchemaType.ObjectId],
         ref: "pets"
