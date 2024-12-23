@@ -13,11 +13,7 @@ const petSchema = new mongoose.Schema({
         ref:'user',
         required:true,
     },
-    addressId:{
-        type:mongoose.SchemaTypes.ObjectId,
-        ref:'address',
-        required:true,
-    },
+   
     paymentStatus:{
         type:String,
         enum:['pending','Success','Failure'],
@@ -33,22 +29,19 @@ const petSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    producTDescription:{
+    productDescription:{
         type:String,
-        required:true,
+       
     },
     productImage:{
-        type:String,
+        type:[String],
         
     },
-    Amount:{
+    amount:{
         type:String,
        
     },
-    quantity:{
-        type:String,
-       
-    },
+    
     createdAt: {
         type: Date,
         default: () => {
@@ -64,4 +57,4 @@ const petSchema = new mongoose.Schema({
     }
 
 })
-module.exports = mongoose.model("PAYMENT-GETWAYS", petSchema);
+module.exports = mongoose.model("PAYMENT", petSchema);
