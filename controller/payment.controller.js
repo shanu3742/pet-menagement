@@ -37,7 +37,7 @@ var request = {
   },
   
   "order_meta": {
-    "return_url": `${AppConfig.APP_CONFIG.ClientBase_Url}/home/Payment/scccess/${SavedOrder._id}`
+    "return_url": `${AppConfig.APP_CONFIG.ClientBase_Url}/home/payment/scccess/${SavedOrder._id}`
   },
 
 }
