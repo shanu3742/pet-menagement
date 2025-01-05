@@ -6,7 +6,7 @@ const PET = require('./model/pet.model')
 const bodyParser = require('body-parser');
 const  cors = require('cors');
 const { appendFile } = require('fs');
-
+require('dotenv').config()
 //init app 
 const app = express();
 

@@ -1,6 +1,7 @@
-const { getPaymentInfo, onPayment, getOrderList } = require("../controller/payment.controller");
+const { onPayment ,onPaymentStatus,getAllOrder} = require("../controller/payment.controller");
 module.exports = (app) => {
-    app.get('/petApp/api/v1/payment/paymentinfo',getPaymentInfo)
-    app.post('/petApp/api/v1/payment/paymentConfirmation',onPayment);
-    app.get('/petApp/api/v1/order/orderList/:userId',getOrderList)
+    
+    app.post('/petApp/api/v1/payment/onPayment',onPayment)
+    app.patch('/petApp/api/v1/payment/onPaymentStatus',onPaymentStatus)
+    app.get('/petApp/api/v1/order/orderList/:userId',getAllOrder)
 }
