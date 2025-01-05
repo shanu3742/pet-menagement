@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const petSchema = new mongoose.Schema({
     productId:{
         type:mongoose.SchemaTypes.ObjectId,
-        ref:'product',
+        ref:'PET',
         required:true,
     },
     userId:{
@@ -16,7 +16,7 @@ const petSchema = new mongoose.Schema({
    
     paymentStatus:{
         type:String,
-        enum:['pending','Success','Failure'],
+        enum:['pending','success','failure'],
         default:()=>{
             return 'pending'
         }

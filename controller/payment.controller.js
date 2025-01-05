@@ -5,17 +5,17 @@ const AppConfig=require('../config/app.config')
 exports.onPayment=async(req,res)=>{
  
   try{
-   
   const productId=req.body.productId;
   const userId=req.body.userId;
- 
 
 Cashfree.XClientId = process.env.XCLIENT_ID;
 Cashfree.XClientSecret = process.env.XCLIENT_SECRET;
 Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
 
 const product=await  PetModel.findById(productId)
-
+if (!product) {
+  return res.status(404).send({ error: "Product not found" });
+}
 let orderObj={
   productId:product?._id,
   userId:userId,
@@ -44,11 +44,11 @@ var request = {
 // Cashfree.PGCreateOrder("2023-08-01", request).then((response) => {
 // })
 let paymentResponse=await Cashfree.PGCreateOrder("2023-08-01", request)
-console.log(paymentResponse)
+console.log(paymentResponse.data,'paymentResponse')
 res.status(200).send(paymentResponse.data)
   }
   catch(err){
-    console.log(err);
+    console.log(err,'error on Pyment');
   }
 }
 
@@ -67,11 +67,11 @@ exports.onPaymentStatus = async (req,res) => {
     }else{
         orderStatus = "failure"
     }
-
+ 
    let savedOrder=await PaymentModel.findById(getOrderResponse.data[0].order_id);
    //console.log('saved order',savedOrder)
       savedOrder.paymentStatus=orderStatus,
-      savedOrder.transitionId=getOrderResponse.data[0].cf_order_id
+      savedOrder.transitionId=orderId
       await savedOrder.save()
 res.status(200).send({
   message:'order placed successfully'
@@ -79,9 +79,26 @@ res.status(200).send({
 
 }
 catch(e){
-//console.log(e)
+console.log(e)
 res.status(500).send({
   message:'server error'
+
 })
 }
+}
+
+exports.getAllOrder=async(req,res)=>{
+  try{
+    const userId=req.params.userId
+    const orderList=await PaymentModel.find({userId:userId,paymentStatus:'success'}).populate('productId')
+    
+    console.log(orderList)
+    res.status(200).send(orderList)
+
+  }
+  catch(e){
+    console.log(e)
+    res.status(500).send(e)
+  }
+
 }
